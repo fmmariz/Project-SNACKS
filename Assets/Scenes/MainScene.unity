@@ -942,7 +942,7 @@ Transform:
   m_GameObject: {fileID: 883433732}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.86, y: -1.39, z: 0}
+  m_LocalPosition: {x: 2.88, y: -1.33, z: 0}
   m_LocalScale: {x: 2.4441, y: 2.4441, z: 2.4441}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -977,7 +977,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.01908341, y: -0.038166583}
@@ -1464,6 +1464,7 @@ MonoBehaviour:
   maxX: 10
   minY: -6
   maxY: 6
+  death: {fileID: 8080394198792637819, guid: 5f38a526968106c439dbe1e6519f9efe, type: 3}
   rb: {fileID: 1264085418}
 --- !u!1 &1320662302
 GameObject:

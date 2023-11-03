@@ -11,6 +11,7 @@ public class CharController : MonoBehaviour
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     public float minX, maxX, minY, maxY;
+    public GameObject death;
 
     public Rigidbody2D rb;
 
@@ -115,6 +116,14 @@ public class CharController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("obstacle"))
+        {
+            DestroyObstacle(other.gameObject);
+        }
+    }
+
     private void GetSnack(GameObject snackObject)
     {
         Destroy(snackObject);
@@ -123,6 +132,7 @@ public class CharController : MonoBehaviour
 
     private void DestroyObstacle(GameObject obstacleObject)
     {
+        Instantiate(death, transform.position, transform.rotation);
         Destroy(obstacleObject);
         gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
     }
