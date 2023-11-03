@@ -1460,6 +1460,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeed: 5
   jumpForce: 30
+  minX: -10
+  maxX: 10
+  minY: -6
+  maxY: 6
   rb: {fileID: 1264085418}
 --- !u!1 &1320662302
 GameObject:

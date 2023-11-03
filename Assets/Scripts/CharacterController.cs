@@ -4,12 +4,13 @@ using UnityEngine;
 using static UnityEditor.PlayerSettings;
 using UnityEngine.XR;
 
-public class CharacterController : MonoBehaviour
+public class CharController : MonoBehaviour
 {
     [SerializeField] 
     private float playerSpeed = 5.0f, jumpForce = 15.0f;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    public float minX, maxX, minY, maxY;
 
     public Rigidbody2D rb;
 
@@ -83,6 +84,13 @@ public class CharacterController : MonoBehaviour
             animator.SetBool("isJumping", false);
 
         }
+        float newX, newY;
+
+        newX = Mathf.Clamp(GetComponent<Rigidbody2D>().position.x, minX, maxX);
+        newY = Mathf.Clamp(GetComponent<Rigidbody2D>().position.y, minY, maxY);
+
+        GetComponent<Rigidbody2D>().position = new Vector2(newX, newY);
+
     }
 
     void Movement(float horizontalMovement){
