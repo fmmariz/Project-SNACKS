@@ -132,9 +132,16 @@ public class CharController : MonoBehaviour
 
     private void DestroyObstacle(GameObject obstacleObject)
     {
-        Instantiate(death, transform.position, transform.rotation);
-        Destroy(obstacleObject);
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
+        if (gameObject.GetComponent<SpriteRenderer>().color == new Color(1f, 0f, 0f, 1f))
+        {
+            Instantiate(death, transform.position, transform.rotation);
+            Destroy(obstacleObject);
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
+        }
+        else
+        {
+            obstacleObject.GetComponent<BoxCollider2D>().isTrigger = false;
+        }
     }
 
     private void ShowWinScreen()
