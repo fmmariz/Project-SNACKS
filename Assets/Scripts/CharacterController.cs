@@ -1,33 +1,78 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
+using UnityEngine.XR;
 
 public class CharacterController : MonoBehaviour
 {
     [SerializeField] 
-    private float playerSpeed = 5f;
+    private float playerSpeed = 5.0f, jumpForce = 15.0f;
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
+
+    public Rigidbody2D rb;
+
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
+       
         if (GameController.Instance.GetCurrentGameState() == GameController.GameState.PLAYING)
         {
             Movement(Input.GetAxis("Horizontal"));
+
+            if ((Input.GetKey(KeyCode.RightArrow)) )
+            {
+                spriteRenderer.flipX = false;
+                animator.SetBool("isWalking", true);
+
+            }
+            else if ((Input.GetKey(KeyCode.LeftArrow)))
+            {
+                spriteRenderer.flipX = true;
+                animator.SetBool("isWalking", true);
+
+
+            }
+            else if ((Input.GetKey(KeyCode.Space)))
+            {
+                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                animator.SetBool("isWalking", false);
+                animator.SetBool("isJumping", true);
+
+
+            }
+            else
+            {
+                animator.SetBool("isWalking", false);
+
+            }
+
+
         }
-        else
+
+        else 
         {
-            GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+            
+            rb.velocity = Vector3.zero;
+            animator.SetBool("isWalking", false);
+            animator.SetBool("isJumping", false);
+
         }
     }
 
     void Movement(float horizontalMovement){
         Vector2 newVelocity = new Vector2(horizontalMovement, 0);
-        GetComponent<Rigidbody2D>().velocity = newVelocity * playerSpeed;
+        rb.velocity = newVelocity * playerSpeed;
     }
+
 
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.CompareTag("snack")){
@@ -38,6 +83,10 @@ public class CharacterController : MonoBehaviour
         }
         if(other.gameObject.CompareTag("portal")){
             ShowWinScreen();
+        }
+        if (other.gameObject.CompareTag("floor"))
+        {
+            animator.SetBool("isJumping", false);
         }
     }
 

@@ -7,6 +7,7 @@ TagManager:
   - snack
   - obstacle
   - portal
+  - floor
   layers:
   - Default
   - TransparentFX
@@ -43,4 +44,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: obstacleLayer
+    uniqueID: 1788928003
+    locked: 0
+  - name: characterLayer
+    uniqueID: 2634782401
     locked: 0
