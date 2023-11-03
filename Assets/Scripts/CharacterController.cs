@@ -28,7 +28,13 @@ public class CharacterController : MonoBehaviour
         {
             Movement(Input.GetAxis("Horizontal"));
 
-            if ((Input.GetKey(KeyCode.RightArrow)) )
+            if ((Input.GetKey(KeyCode.RightArrow)))
+            {
+                spriteRenderer.flipX = false;
+                animator.SetBool("isWalking", true);
+
+            }
+            else if ((Input.GetKey(KeyCode.D)))
             {
                 spriteRenderer.flipX = false;
                 animator.SetBool("isWalking", true);
@@ -39,6 +45,11 @@ public class CharacterController : MonoBehaviour
                 spriteRenderer.flipX = true;
                 animator.SetBool("isWalking", true);
 
+            }
+            else if ((Input.GetKey(KeyCode.A)))
+            {
+                spriteRenderer.flipX = true;
+                animator.SetBool("isWalking", true);
 
             }
             else if ((Input.GetKey(KeyCode.Space)))
@@ -47,6 +58,12 @@ public class CharacterController : MonoBehaviour
                 animator.SetBool("isWalking", false);
                 animator.SetBool("isJumping", true);
 
+            }
+            else if ((Input.GetKey(KeyCode.W)))
+            {
+                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                animator.SetBool("isWalking", false);
+                animator.SetBool("isJumping", true);
 
             }
             else
