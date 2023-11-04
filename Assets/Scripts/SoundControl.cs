@@ -36,16 +36,20 @@ public class SoundControl : MonoBehaviour
 
     public void PlaySoundEffect(SoundEffects sfx)
     {
+        _audioSource.Stop();
+        _audioSource.time = 0;
         switch (sfx)
         {
             case SoundEffects.JUMP:
+                _audioSource.time = 0.15f;
                 _audioSource.clip = jumpSfx; break;
                 case SoundEffects.DESTROY:
                 _audioSource.clip = destroySfx; break;
                 case SoundEffects.WIN:
                 _audioSource.clip = winSfx;
                 break;
-                case SoundEffects.POWERUP:
+            case SoundEffects.POWERUP:
+                _audioSource.time = 0.1f;
                 _audioSource.clip = powerUpSfx; break;
         }
         _audioSource.Play();

@@ -76,11 +76,7 @@ public class CharController : MonoBehaviour
             GameController.soundControl.PlaySoundEffect(SoundControl.SoundEffects.POWERUP);
             GetSnack(other.gameObject);
         }
-        if(other.gameObject.CompareTag("obstacle")){
-            GameController.soundControl.PlaySoundEffect(SoundControl.SoundEffects.DESTROY);
 
-            DestroyObstacle(other.gameObject);
-        }
         if(other.gameObject.CompareTag("portal")){
             if (GameController.Instance.GetCurrentGameState() != GameController.GameState.VICTORY)
             {
@@ -99,6 +95,8 @@ public class CharController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("obstacle"))
         {
+            GameController.soundControl.PlaySoundEffect(SoundControl.SoundEffects.DESTROY);
+
             DestroyObstacle(other.gameObject);
         }
     }
