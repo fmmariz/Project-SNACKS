@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour
     }
     public static GameController Instance { get; private set; }
     public static UIController uiController;
+    public static SoundControl soundControl;
 
     [SerializeField]
     public GameObject stage;
@@ -35,6 +36,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         uiController = GetComponent<UIController>();
+        soundControl = GetComponent<SoundControl>();
         _currentState = GameState.PLAYING;
 
         stage.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
@@ -62,4 +64,5 @@ public class GameController : MonoBehaviour
     {
         _currentState = currentState;
     }
+
 }

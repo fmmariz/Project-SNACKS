@@ -46,6 +46,7 @@ public class CharController : MonoBehaviour
                 rb.AddForce(Vector2.up * jumpForce  , ForceMode2D.Impulse);
                 animator.SetBool("isWalking", false);
                 animator.SetBool("isJumping", true);
+                GameController.soundControl.PlaySoundEffect(SoundControl.SoundEffects.JUMP);
             }
         }
         else 
@@ -72,15 +73,23 @@ public class CharController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.CompareTag("snack")){
+            GameController.soundControl.PlaySoundEffect(SoundControl.SoundEffects.POWERUP);
             GetSnack(other.gameObject);
         }
         if(other.gameObject.CompareTag("obstacle")){
+            GameController.soundControl.PlaySoundEffect(SoundControl.SoundEffects.DESTROY);
+
             DestroyObstacle(other.gameObject);
         }
         if(other.gameObject.CompareTag("portal")){
-            ShowWinScreen();
-        }
-        if (other.gameObject.CompareTag("floor"))
+            if (GameController.Instance.GetCurrentGameState() != GameController.GameState.VICTORY)
+            {
+                GameController.soundControl.PlaySoundEffect(SoundControl.SoundEffects.WIN);
+
+                ShowWinScreen();
+            }
+            }
+            if (other.gameObject.CompareTag("floor"))
         {
             animator.SetBool("isJumping", false);
         }
