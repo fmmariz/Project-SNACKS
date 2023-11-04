@@ -13,6 +13,7 @@ public class CharController : MonoBehaviour
     public float minX, maxX, minY, maxY;
     public GameObject death;
 
+
     public Rigidbody2D rb;
 
     void Start()
@@ -56,12 +57,12 @@ public class CharController : MonoBehaviour
             animator.SetBool("isJumping", false);
         }
 
-        float newX, newY;
+        //float newX, newY;
         
-        newX = Mathf.Clamp(GetComponent<Rigidbody2D>().position.x, minX, maxX);
-        newY = Mathf.Clamp(GetComponent<Rigidbody2D>().position.y, minY, maxY);
+        //newX = Mathf.Clamp(GetComponent<Rigidbody2D>().position.x, minX, maxX);
+        //newY = Mathf.Clamp(GetComponent<Rigidbody2D>().position.y, minY, maxY);
 
-        GetComponent<Rigidbody2D>().position = new Vector2(newX, newY);
+        //GetComponent<Rigidbody2D>().position = new Vector2(newX, newY);
 
     }
 

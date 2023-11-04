@@ -39,8 +39,10 @@ public class GameController : MonoBehaviour
         soundControl = GetComponent<SoundControl>();
         _currentState = GameState.PLAYING;
 
-        stage.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-
+        foreach (Transform child in stage.transform)
+        {
+            child.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        }
 
     }
 
