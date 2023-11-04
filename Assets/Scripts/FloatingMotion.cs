@@ -13,7 +13,7 @@ public class FloatingMotion : MonoBehaviour
 
     void Update()
     {
-        float newY = initialPosition.y + Mathf.Sin(Time.time * floatSpeed) * floatAmplitude;
-        transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+        //float newY = initialPosition.y + Mathf.Sin(Time.time * floatSpeed) * floatAmplitude;
+        //transform.position = new Vector3(transform.position.x, newY, transform.position.z);
     }
 }

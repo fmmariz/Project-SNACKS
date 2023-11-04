@@ -7,7 +7,7 @@ using UnityEngine.XR;
 public class CharController : MonoBehaviour
 {
     [SerializeField] 
-    private float playerSpeed = 5.0f, jumpForce = 15.0f;
+    private float playerSpeed = 5.0f, jumpForce = 100.0f;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     public float minX, maxX, minY, maxY;
@@ -20,73 +20,43 @@ public class CharController : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
        
         if (GameController.Instance.GetCurrentGameState() == GameController.GameState.PLAYING)
         {
-            Movement(Input.GetAxis("Horizontal"));
+            float moveDir = Input.GetAxis("Horizontal");
+            Movement(moveDir);
 
-            if ((Input.GetKey(KeyCode.RightArrow)))
+            if (moveDir != 0)
             {
-                spriteRenderer.flipX = false;
+                spriteRenderer.flipX = moveDir < 0;
                 animator.SetBool("isWalking", true);
-
-            }
-            else if ((Input.GetKey(KeyCode.D)))
-            {
-                spriteRenderer.flipX = false;
-                animator.SetBool("isWalking", true);
-
-            }
-            else if ((Input.GetKey(KeyCode.LeftArrow)))
-            {
-                spriteRenderer.flipX = true;
-                animator.SetBool("isWalking", true);
-
-            }
-            else if ((Input.GetKey(KeyCode.A)))
-            {
-                spriteRenderer.flipX = true;
-                animator.SetBool("isWalking", true);
-
-            }
-            else if ((Input.GetKey(KeyCode.Space)))
-            {
-                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-                animator.SetBool("isWalking", false);
-                animator.SetBool("isJumping", true);
-
-            }
-            else if ((Input.GetKey(KeyCode.W)))
-            {
-                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-                animator.SetBool("isWalking", false);
-                animator.SetBool("isJumping", true);
-
             }
             else
             {
                 animator.SetBool("isWalking", false);
-
             }
 
-
+            if (Input.GetAxis("Vertical") > 0 && !animator.GetBool("isJumping")) {
+                rb.AddForce(Vector2.up * jumpForce  , ForceMode2D.Impulse);
+                animator.SetBool("isWalking", false);
+                animator.SetBool("isJumping", true);
+            }
         }
-
         else 
         {
-            
             rb.velocity = Vector3.zero;
             animator.SetBool("isWalking", false);
             animator.SetBool("isJumping", false);
-
         }
-        float newX, newY;
 
+        float newX, newY;
+        
         newX = Mathf.Clamp(GetComponent<Rigidbody2D>().position.x, minX, maxX);
         newY = Mathf.Clamp(GetComponent<Rigidbody2D>().position.y, minY, maxY);
 
@@ -95,8 +65,8 @@ public class CharController : MonoBehaviour
     }
 
     void Movement(float horizontalMovement){
-        Vector2 newVelocity = new Vector2(horizontalMovement, 0);
-        rb.velocity = newVelocity * playerSpeed;
+        Vector2 newVelocity = new Vector2(horizontalMovement * playerSpeed, 0);
+        rb.velocity += newVelocity;
     }
 
 

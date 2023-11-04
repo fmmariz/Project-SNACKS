@@ -12,6 +12,9 @@ public class GameController : MonoBehaviour
     public static GameController Instance { get; private set; }
     public static UIController uiController;
 
+    [SerializeField]
+    public GameObject stage;
+
     private GameState _currentState; 
 
     private void Awake()
@@ -33,7 +36,10 @@ public class GameController : MonoBehaviour
     {
         uiController = GetComponent<UIController>();
         _currentState = GameState.PLAYING;
-        
+
+        stage.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+
+
     }
 
     // Update is called once per frame

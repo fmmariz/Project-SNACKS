@@ -436,9 +436,9 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534041184}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
@@ -1077,6 +1077,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 204cd4230ca29ff4a88d2266995fc460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stage: {fileID: 534041184}
 --- !u!4 &985694085
 Transform:
   m_ObjectHideFlags: 0
@@ -1299,7 +1300,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: e7a7e88069cc84f9689d26d531763309, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -1429,12 +1430,12 @@ Rigidbody2D:
   m_GameObject: {fileID: 1264085412}
   m_BodyType: 0
   m_Simulated: 1
-  m_UseFullKinematicContacts: 1
+  m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 20
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1445,7 +1446,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!114 &1264085419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1458,8 +1459,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cba2dd3ffb374e94a8987f1d05172b74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 5
-  jumpForce: 30
+  playerSpeed: 6
+  jumpForce: 16
   minX: -10
   maxX: 10
   minY: -6
