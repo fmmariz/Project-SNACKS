@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 using UnityEngine.XR;
 
 public class CharController : MonoBehaviour
 {
     [SerializeField] 
-    private float playerSpeed = 5.0f, jumpForce = 100.0f;
+    private float playerSpeed = 5.0f, jumpForce = 100.0f, resetCooldown = 5f;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     public float minX, maxX, minY, maxY;
     public GameObject death;
 
+   
+    private float _resetTimer;
 
     public Rigidbody2D rb;
 
@@ -22,6 +23,7 @@ public class CharController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        GameController.Instance.resetController.SetResetPosition(gameObject.transform.position);
     }
 
     // Update is called once per frame
@@ -30,24 +32,17 @@ public class CharController : MonoBehaviour
        
         if (GameController.Instance.GetCurrentGameState() == GameController.GameState.PLAYING)
         {
-            float moveDir = Input.GetAxis("Horizontal");
-            Movement(moveDir);
+            MovementMethod();
 
-            if (moveDir != 0)
+            if (Input.GetKey(KeyCode.R) && _resetTimer <= 0)
             {
-                spriteRenderer.flipX = moveDir < 0;
-                animator.SetBool("isWalking", true);
+                Reset();
             }
-            else
+            else if(_resetTimer > 0) 
             {
-                animator.SetBool("isWalking", false);
-            }
-
-            if (Input.GetAxis("Vertical") > 0 && !animator.GetBool("isJumping")) {
-                rb.AddForce(Vector2.up * jumpForce  , ForceMode2D.Impulse);
-                animator.SetBool("isWalking", false);
-                animator.SetBool("isJumping", true);
-                GameController.soundControl.PlaySoundEffect(SoundControl.SoundEffects.JUMP);
+                _resetTimer -= Time.deltaTime;
+                if (_resetTimer < 0.1f) _resetTimer = 0;
+                GameController.Instance.uiController.UpdateResetTimer(_resetTimer / resetCooldown);
             }
         }
         else 
@@ -66,22 +61,52 @@ public class CharController : MonoBehaviour
 
     }
 
+    private void MovementMethod()
+    {
+        float moveDir = Input.GetAxisRaw("Horizontal");
+        Movement(moveDir);
+
+        if (moveDir != 0)
+        {
+            spriteRenderer.flipX = moveDir < 0;
+            animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
+        }
+
+        if (Input.GetAxis("Vertical") > 0 && !animator.GetBool("isJumping"))
+        {
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            animator.SetBool("isWalking", false);
+            animator.SetBool("isJumping", true);
+            GameController.Instance.soundControl.PlaySoundEffect("jump");
+        }
+    }
+
     void Movement(float horizontalMovement){
         Vector2 newVelocity = new Vector2(horizontalMovement * playerSpeed, 0);
         rb.velocity += newVelocity;
     }
 
+    private void Reset()
+    {
+        gameObject.transform.position = GameController.Instance.resetController.GetResetPosition();
+        _resetTimer = 5f;
+    }
+
 
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.CompareTag("snack")){
-            GameController.soundControl.PlaySoundEffect(SoundControl.SoundEffects.POWERUP);
+            GameController.Instance.soundControl.PlaySoundEffect("powerup");
             GetSnack(other.gameObject);
         }
 
         if(other.gameObject.CompareTag("portal")){
             if (GameController.Instance.GetCurrentGameState() != GameController.GameState.VICTORY)
             {
-                GameController.soundControl.PlaySoundEffect(SoundControl.SoundEffects.WIN);
+                GameController.Instance.soundControl.PlaySoundEffect("win");
 
                 ShowWinScreen();
             }
@@ -96,7 +121,7 @@ public class CharController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("obstacle"))
         {
-            GameController.soundControl.PlaySoundEffect(SoundControl.SoundEffects.DESTROY);
+            GameController.Instance.soundControl.PlaySoundEffect("destroy");
 
             DestroyObstacle(other.gameObject);
         }

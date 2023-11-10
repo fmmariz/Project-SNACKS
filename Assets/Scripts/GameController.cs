@@ -10,8 +10,9 @@ public class GameController : MonoBehaviour
         VICTORY
     }
     public static GameController Instance { get; private set; }
-    public static UIController uiController;
-    public static SoundControl soundControl;
+    public UIController uiController;
+    public SoundController soundControl;
+    public ResetController resetController;
 
     [SerializeField]
     public GameObject stage;
@@ -20,8 +21,6 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
-        // If there is an instance, and it's not me, delete myself.
-
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -36,7 +35,8 @@ public class GameController : MonoBehaviour
     void Start()
     {
         uiController = GetComponent<UIController>();
-        soundControl = GetComponent<SoundControl>();
+        soundControl = GetComponent<SoundController>();
+        resetController = GetComponent<ResetController>();
         _currentState = GameState.PLAYING;
 
         foreach (Transform child in stage.transform)
