@@ -90,7 +90,7 @@ public class CharController : MonoBehaviour
         rb.velocity += newVelocity;
     }
 
-    private void Reset()
+    void Reset()
     {
         gameObject.transform.position = GameController.Instance.resetController.GetResetPosition();
         _resetTimer = 5f;
