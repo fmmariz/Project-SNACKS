@@ -3342,12 +3342,14 @@ MonoBehaviour:
   - destroy
   - powerup
   - savepoint
+  - win
   sfxClips:
   - {fileID: 8300000, guid: f1ef408786bbbdf46b56d623d47c0c17, type: 3}
   - {fileID: 8300000, guid: ed034364ed21e484c9c77ef7e2f24080, type: 3}
   - {fileID: 8300000, guid: 593014f0e32123d4f9deb37a2a3ca62b, type: 3}
   - {fileID: 8300000, guid: 1dc3127a28674c34cb237803b0cad818, type: 3}
   - {fileID: 8300000, guid: f4f1a60157043384785d40ba14f53de1, type: 3}
+  - {fileID: 8300000, guid: f1ef408786bbbdf46b56d623d47c0c17, type: 3}
   audioSourcePrefab: {fileID: 7142354528052803922, guid: 83e87b787d2d8a54bace568bb54c2f19, type: 3}
 --- !u!114 &985694087
 MonoBehaviour:

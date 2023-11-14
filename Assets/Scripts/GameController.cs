@@ -7,7 +7,8 @@ public class GameController : MonoBehaviour
 {
     public enum GameState{
         PLAYING,
-        VICTORY
+        VICTORY,
+        GAMEOVER
     }
     public static GameController Instance { get; private set; }
     public UIController uiController;
