@@ -8,6 +8,7 @@ TagManager:
   - obstacle
   - portal
   - floor
+  - deathZone
   layers:
   - Default
   - TransparentFX
