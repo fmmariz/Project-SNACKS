@@ -64,4 +64,9 @@ public class LifeManager : MonoBehaviour
         SceneManager.LoadScene("MainScene");
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
 }
