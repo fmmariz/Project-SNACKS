@@ -2,15 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FallingPlatformController : MonoBehaviour
+public class FallingPlatformController : ResetListeners
 {
     // Start is called before the first frame update
-    public Rigidbody2D rb;
+    private Rigidbody2D rb;
+    private Vector3 _originalPosition;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        _originalPosition = rb.position;
+
+        GameController.Instance.charController.AddResetListeners(this);
     }
 
     // Update is called once per frame
@@ -29,5 +33,11 @@ public class FallingPlatformController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
+    }
+
+    public override void OnReset()
+    {
+        rb.position = _originalPosition;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 }

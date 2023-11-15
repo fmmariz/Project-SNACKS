@@ -8,7 +8,8 @@ public class Damage : MonoBehaviour
     public LifeManager LifeManager;
     public CharController characterController;
 
-    public void OnCollisionEnter2D(Collision2D collision)
+
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {

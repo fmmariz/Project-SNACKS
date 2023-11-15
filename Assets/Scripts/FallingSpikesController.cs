@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class FallingSpikesController : MonoBehaviour
+public class FallingSpikesController : ResetListeners
 {
     // Start is called before the first frame update
 
@@ -16,6 +16,14 @@ public class FallingSpikesController : MonoBehaviour
 
     void Start()
     {
+        t = 0;
+        GameController.Instance.charController.AddResetListeners(this);
+    }
+
+    public override void OnReset()
+    {
+        _activated = false;
+        transform.localPosition = new Vector3(transform.localPosition.x, _risenPosition, transform.localPosition.z);
         t = 0;
     }
 
