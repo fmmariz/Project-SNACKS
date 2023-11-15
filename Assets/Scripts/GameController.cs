@@ -8,8 +8,10 @@ public class GameController : MonoBehaviour
     public enum GameState{
         PLAYING,
         VICTORY,
-        GAMEOVER
+        GAMEOVER,
+        PAUSED
     }
+
     public static GameController Instance { get; private set; }
     public UIController uiController;
     public SoundController soundControl;
@@ -54,7 +56,22 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (_currentState  == GameState.PLAYING)
+            {
+                Time.timeScale = 0f;
+                uiController.ShowPauseMessage(true);
+                _currentState = GameState.PAUSED;
+            }
+            else if(_currentState == GameState.PAUSED)
+            {
+                _currentState = GameState.PLAYING;
+
+                Time.timeScale = 1f;
+                uiController.ShowPauseMessage(false);
+            }
+        }
     }
 
     public UIController GetUIController()
@@ -70,6 +87,12 @@ public class GameController : MonoBehaviour
     public void SetCurrentGameState(GameState currentState)
     {
         _currentState = currentState;
+    }
+
+    public void CloseGame()
+    {
+        Debug.Log("Aie!");
+        Application.Quit();
     }
 
 }
