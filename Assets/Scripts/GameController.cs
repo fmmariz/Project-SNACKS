@@ -16,9 +16,14 @@ public class GameController : MonoBehaviour
     public UIController uiController;
     public SoundController soundControl;
     public ResetController resetController;
+    public LifeManager lifeManager;
+    public DamageController damageController;
+
 
     [SerializeField]
     public GameObject stage;
+    [SerializeField]
+    public CharController charController;
 
     private GameState _currentState; 
 
@@ -40,6 +45,9 @@ public class GameController : MonoBehaviour
         uiController = GetComponent<UIController>();
         soundControl = GetComponent<SoundController>();
         resetController = GetComponent<ResetController>();
+        lifeManager = GetComponent<LifeManager>();
+        damageController = GetComponent<DamageController>();
+
         _currentState = GameState.PLAYING;
 
         foreach (Transform child in stage.transform)
@@ -91,7 +99,6 @@ public class GameController : MonoBehaviour
 
     public void CloseGame()
     {
-        Debug.Log("Aie!");
         Application.Quit();
     }
 

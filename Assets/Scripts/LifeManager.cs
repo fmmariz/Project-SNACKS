@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LifeManager : MonoBehaviour
 {
-    public static int currentLife;
+    public int currentLife;
 
     public Image lifePrefab;
     public Transform LifePoints;

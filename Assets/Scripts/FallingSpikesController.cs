@@ -22,18 +22,18 @@ public class FallingSpikesController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        float delayInS = 1f;
         if (_activated)
         {
             t += 2*Time.deltaTime;
-            if (t < 1)
+            if (t>delayInS && t < 1+delayInS)
             {
-                float value = Mathf.SmoothStep(_risenPosition, _fallenPosition, t);
+                float value = Mathf.SmoothStep(_risenPosition, _fallenPosition, t-delayInS);
                 transform.localPosition = new Vector3(transform.localPosition.x, value, transform.localPosition.z);
             }
-            if(t > 5)
+            if(t > 5+delayInS)
             {
-                float value = Mathf.SmoothStep(_fallenPosition,_risenPosition, t-5);
+                float value = Mathf.SmoothStep(_fallenPosition,_risenPosition, t-(5+delayInS));
                 transform.localPosition = new Vector3(transform.localPosition.x, value, transform.localPosition.z);
             }
         }
@@ -48,7 +48,15 @@ public class FallingSpikesController : MonoBehaviour
         }
     }
 
-    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            GameController.Instance.damageController.InflictDamage();
+        }
+    }
 
-   
+
+
+
 }

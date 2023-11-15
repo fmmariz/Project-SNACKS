@@ -12,9 +12,7 @@ public class Damage : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            LifeManager.currentLife--;
-            LifeManager.UpdateUI();
-            characterController.Reset();
+            GameController.Instance.damageController.InflictDamage();
         }
     }
 }
