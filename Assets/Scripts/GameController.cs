@@ -42,7 +42,11 @@ public class GameController : MonoBehaviour
 
         foreach (Transform child in stage.transform)
         {
-            child.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            Rigidbody2D rigidBody;
+            if (child.TryGetComponent<Rigidbody2D>(out rigidBody))
+            {
+                rigidBody.constraints = RigidbodyConstraints2D.FreezeAll;
+            }
         }
 
     }

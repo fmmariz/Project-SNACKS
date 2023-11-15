@@ -7,19 +7,16 @@ public class ResetObject : MonoBehaviour
 {
     
 
-    void Start()
-    {
-        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-    }
-
     void Update()
     {
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         GameController.Instance.soundControl.PlaySoundEffect("savepoint");
-        GameController.Instance.resetController.SetResetPosition(collision.otherCollider.transform.position);
+        GameController.Instance.resetController.SetResetPosition(collision.transform.position);
         Destroy(gameObject);
     }
 

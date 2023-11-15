@@ -98,10 +98,6 @@ public class CharController : MonoBehaviour
 
 
     private void OnCollisionEnter2D(Collision2D other) {
-        if(other.gameObject.CompareTag("snack")){
-            GameController.Instance.soundControl.PlaySoundEffect("powerup");
-            GetSnack(other.gameObject);
-        }
 
         if(other.gameObject.CompareTag("portal")){
             if (GameController.Instance.GetCurrentGameState() != GameController.GameState.VICTORY)
@@ -124,6 +120,10 @@ public class CharController : MonoBehaviour
             GameController.Instance.soundControl.PlaySoundEffect("destroy");
 
             DestroyObstacle(other.gameObject);
+        }else if(other.gameObject.CompareTag("snack"))
+        {
+            GameController.Instance.soundControl.PlaySoundEffect("powerup");
+            GetSnack(other.gameObject);
         }
     }
 

@@ -8,6 +8,8 @@ TagManager:
   - obstacle
   - portal
   - floor
+  - deathZone
+  - save
   layers:
   - Default
   - TransparentFX
@@ -15,7 +17,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - SavePoints
   - 
   - 
   - 
