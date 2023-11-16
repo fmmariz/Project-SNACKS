@@ -7,15 +7,23 @@ public class GameController : MonoBehaviour
 {
     public enum GameState{
         PLAYING,
-        VICTORY
+        VICTORY,
+        GAMEOVER,
+        PAUSED
     }
+
     public static GameController Instance { get; private set; }
     public UIController uiController;
     public SoundController soundControl;
     public ResetController resetController;
+    public LifeManager lifeManager;
+    public DamageController damageController;
+
 
     [SerializeField]
     public GameObject stage;
+    [SerializeField]
+    public CharController charController;
 
     private GameState _currentState; 
 
@@ -37,11 +45,18 @@ public class GameController : MonoBehaviour
         uiController = GetComponent<UIController>();
         soundControl = GetComponent<SoundController>();
         resetController = GetComponent<ResetController>();
+        lifeManager = GetComponent<LifeManager>();
+        damageController = GetComponent<DamageController>();
+
         _currentState = GameState.PLAYING;
 
         foreach (Transform child in stage.transform)
         {
-            child.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            Rigidbody2D rigidBody;
+            if (child.TryGetComponent<Rigidbody2D>(out rigidBody))
+            {
+                rigidBody.constraints = RigidbodyConstraints2D.FreezeAll;
+            }
         }
 
     }
@@ -49,7 +64,22 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (_currentState  == GameState.PLAYING)
+            {
+                Time.timeScale = 0f;
+                uiController.ShowPauseMessage(true);
+                _currentState = GameState.PAUSED;
+            }
+            else if(_currentState == GameState.PAUSED)
+            {
+                _currentState = GameState.PLAYING;
+
+                Time.timeScale = 1f;
+                uiController.ShowPauseMessage(false);
+            }
+        }
     }
 
     public UIController GetUIController()
@@ -65,6 +95,11 @@ public class GameController : MonoBehaviour
     public void SetCurrentGameState(GameState currentState)
     {
         _currentState = currentState;
+    }
+
+    public void CloseGame()
+    {
+        Application.Quit();
     }
 
 }

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LifeManager : MonoBehaviour
 {
-    public static int currentLife;
+    public int currentLife;
 
     public Image lifePrefab;
     public Transform LifePoints;
@@ -53,8 +53,7 @@ public class LifeManager : MonoBehaviour
         if (currentLife == 0)
         {
             GameOverMessage.SetActive(true);
-
-            //declare gamestate to OVER :)
+            GameController.Instance.SetCurrentGameState(GameController.GameState.GAMEOVER);
         }
     }
 
@@ -62,6 +61,11 @@ public class LifeManager : MonoBehaviour
     {
         maxLife = 3;
         SceneManager.LoadScene("MainScene");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
 }

@@ -17,6 +17,8 @@ public class CharController : MonoBehaviour
 
     public Rigidbody2D rb;
 
+    private List<ResetListeners> _resetListeners;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -24,6 +26,7 @@ public class CharController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         GameController.Instance.resetController.SetResetPosition(gameObject.transform.position);
+        _resetListeners = new List<ResetListeners>();
     }
 
     // Update is called once per frame
@@ -90,18 +93,23 @@ public class CharController : MonoBehaviour
         rb.velocity += newVelocity;
     }
 
-    void Reset()
+    public void Reset()
     {
         gameObject.transform.position = GameController.Instance.resetController.GetResetPosition();
         _resetTimer = 5f;
+        foreach(ResetListeners rl in _resetListeners)
+        {
+            rl.OnReset();
+        }
+    }
+
+    public void AddResetListeners(ResetListeners resetListeners)
+    {
+        _resetListeners.Add(resetListeners);
     }
 
 
     private void OnCollisionEnter2D(Collision2D other) {
-        if(other.gameObject.CompareTag("snack")){
-            GameController.Instance.soundControl.PlaySoundEffect("powerup");
-            GetSnack(other.gameObject);
-        }
 
         if(other.gameObject.CompareTag("portal")){
             if (GameController.Instance.GetCurrentGameState() != GameController.GameState.VICTORY)
@@ -124,6 +132,10 @@ public class CharController : MonoBehaviour
             GameController.Instance.soundControl.PlaySoundEffect("destroy");
 
             DestroyObstacle(other.gameObject);
+        }else if(other.gameObject.CompareTag("snack"))
+        {
+            GameController.Instance.soundControl.PlaySoundEffect("powerup");
+            GetSnack(other.gameObject);
         }
     }
 

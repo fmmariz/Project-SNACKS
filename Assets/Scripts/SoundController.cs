@@ -43,6 +43,7 @@ public class SoundController : MonoBehaviour
         audioSource.Stop();
         audioSource.time = 0.15f;
         AudioClip clip = sfxClips[sfxNames.IndexOf(sfxName)];
+        audioSource.volume = 0.5f;
         audioSource.clip = clip;
         float clipLength = clip.length;
 

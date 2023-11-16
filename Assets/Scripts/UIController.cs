@@ -14,9 +14,13 @@ public class UIController : MonoBehaviour
     private GameObject _resetIcon;
     private Slider _resetSlider;
 
+    [SerializeField]
+    private GameObject _pauseMenu;
+
     void Start()
     {
         victoryMessage.SetActive(false);
+        _pauseMenu.SetActive(false);
 
         _resetIcon = resetButton.transform.GetChild(0).gameObject;
         _resetSlider = resetButton.GetComponent<Slider>();
@@ -31,6 +35,11 @@ public class UIController : MonoBehaviour
     public void ShowWinningMessage()
     {
         victoryMessage.SetActive(true);
+    }
+
+    public void ShowPauseMessage(bool show)
+    {
+        _pauseMenu.SetActive(show);
     }
 
     public void UpdateResetTimer(float pct)
