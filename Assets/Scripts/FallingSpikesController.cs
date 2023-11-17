@@ -18,6 +18,7 @@ public class FallingSpikesController : ResetListeners
     {
         t = 0;
         GameController.Instance.charController.AddResetListeners(this);
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
     public override void OnReset()
@@ -56,13 +57,7 @@ public class FallingSpikesController : ResetListeners
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            GameController.Instance.damageController.InflictDamage();
-        }
-    }
+
 
 
 

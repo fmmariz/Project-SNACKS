@@ -5,19 +5,30 @@ using UnityEngine.XR;
 
 public class CharController : MonoBehaviour
 {
-    [SerializeField] 
+    [SerializeField]
     private float playerSpeed = 5.0f, jumpForce = 100.0f, resetCooldown = 5f;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     public float minX, maxX, minY, maxY;
     public GameObject death;
 
-   
+
     private float _resetTimer;
 
     public Rigidbody2D rb;
 
     private List<ResetListeners> _resetListeners;
+
+    [SerializeField]
+    public LayerMask floorLayer;
+
+    private enum ActiveSnack
+    {
+        POWER,
+        FLIGHT,
+        SHOOT
+    }
+    private List<ActiveSnack> _activeSnacks;
 
     void Start()
     {
@@ -27,12 +38,13 @@ public class CharController : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         GameController.Instance.resetController.SetResetPosition(gameObject.transform.position);
         _resetListeners = new List<ResetListeners>();
+        _activeSnacks = new List<ActiveSnack>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-       
+
         if (GameController.Instance.GetCurrentGameState() == GameController.GameState.PLAYING)
         {
             MovementMethod();
@@ -41,14 +53,14 @@ public class CharController : MonoBehaviour
             {
                 Reset();
             }
-            else if(_resetTimer > 0) 
+            else if (_resetTimer > 0)
             {
                 _resetTimer -= Time.deltaTime;
                 if (_resetTimer < 0.1f) _resetTimer = 0;
                 GameController.Instance.uiController.UpdateResetTimer(_resetTimer / resetCooldown);
             }
         }
-        else 
+        else
         {
             rb.velocity = Vector3.zero;
             animator.SetBool("isWalking", false);
@@ -56,7 +68,7 @@ public class CharController : MonoBehaviour
         }
 
         //float newX, newY;
-        
+
         //newX = Mathf.Clamp(GetComponent<Rigidbody2D>().position.x, minX, maxX);
         //newY = Mathf.Clamp(GetComponent<Rigidbody2D>().position.y, minY, maxY);
 
@@ -88,16 +100,18 @@ public class CharController : MonoBehaviour
         }
     }
 
-    void Movement(float horizontalMovement){
+    void Movement(float horizontalMovement)
+    {
         Vector2 newVelocity = new Vector2(horizontalMovement * playerSpeed, 0);
         rb.velocity += newVelocity;
     }
 
     public void Reset()
     {
+        rb.velocity = Vector3.zero;
         gameObject.transform.position = GameController.Instance.resetController.GetResetPosition();
         _resetTimer = 5f;
-        foreach(ResetListeners rl in _resetListeners)
+        foreach (ResetListeners rl in _resetListeners)
         {
             rl.OnReset();
         }
@@ -109,33 +123,49 @@ public class CharController : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter2D(Collision2D other) {
+    private void OnCollisionEnter2D(Collision2D other)
+    {
 
-        if(other.gameObject.CompareTag("portal")){
+        if (other.gameObject.CompareTag("portal"))
+        {
             if (GameController.Instance.GetCurrentGameState() != GameController.GameState.VICTORY)
             {
                 GameController.Instance.soundControl.PlaySoundEffect("win");
 
                 ShowWinScreen();
             }
-            }
-            if (other.gameObject.CompareTag("floor"))
+        }else if (other.gameObject.CompareTag("floor"))
         {
-            animator.SetBool("isJumping", false);
+            GroundRaycastJumpCheck();
+        }else if (other.gameObject.CompareTag("obstacle"))
+        {
+            DestroyObstacle(other.gameObject);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("obstacle"))
-        {
-            GameController.Instance.soundControl.PlaySoundEffect("destroy");
-
-            DestroyObstacle(other.gameObject);
-        }else if(other.gameObject.CompareTag("snack"))
+        if (other.gameObject.CompareTag("snack"))
         {
             GameController.Instance.soundControl.PlaySoundEffect("powerup");
+            GameController.Instance.uiController.ShowMessage("Power UP !!", "Break obstacles with ease!", 3f);
             GetSnack(other.gameObject);
+        }
+    }
+
+    void GroundRaycastJumpCheck()
+    {
+        RaycastHit hit;
+        SpriteRenderer _sr = spriteRenderer;
+        Vector3 bottomPosition = transform.position;
+        bottomPosition.y = _sr.bounds.min.y;
+        float distance = (_sr.bounds.max.y - _sr.bounds.min.y)/ 5f;
+        Debug.Log($"{ distance}");
+        Debug.DrawRay( transform.position, Vector3.down * distance, Color.magenta, 30f,false);
+
+        if (Physics2D.Raycast(bottomPosition, Vector3.down, distance, floorLayer))
+        {
+            animator.SetBool("isJumping", false);
         }
     }
 
@@ -143,19 +173,17 @@ public class CharController : MonoBehaviour
     {
         Destroy(snackObject);
         gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 0f, 0f, 1f);
+        _activeSnacks.Add(ActiveSnack.POWER);
     }
 
     private void DestroyObstacle(GameObject obstacleObject)
     {
-        if (gameObject.GetComponent<SpriteRenderer>().color == new Color(1f, 0f, 0f, 1f))
+        if (_activeSnacks.Contains(ActiveSnack.POWER))
         {
+            GameController.Instance.soundControl.PlaySoundEffect("destroy");
             Instantiate(death, transform.position, transform.rotation);
             Destroy(obstacleObject);
             gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
-        }
-        else
-        {
-            obstacleObject.GetComponent<BoxCollider2D>().isTrigger = false;
         }
     }
 
