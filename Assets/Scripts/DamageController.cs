@@ -20,7 +20,8 @@ public class DamageController : MonoBehaviour
     {
         GameController.Instance.lifeManager.currentLife--;
         GameController.Instance.lifeManager.UpdateUI();
-        GameController.Instance.charController.Reset();
+        GameController.Instance.charController.gameObject.GetComponent<DeathAnim>().PlayDeathAnim();
+        //GameController.Instance.charController.Reset();
         GameController.Instance.soundControl.PlaySoundEffect("damage");
     }
 }

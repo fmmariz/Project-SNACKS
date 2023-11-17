@@ -148,7 +148,7 @@ public class CharController : MonoBehaviour
         if (other.gameObject.CompareTag("snack"))
         {
             GameController.Instance.soundControl.PlaySoundEffect("powerup");
-            GameController.Instance.uiController.ShowMessage("Power UP !!", "Break obstacles with ease!", 3f);
+            GameController.Instance.uiController.ShowMessage("Power UP !!", "Break obstaclesw with ease!", 3f);
             GetSnack(other.gameObject);
         }
     }
@@ -191,5 +191,10 @@ public class CharController : MonoBehaviour
     {
         GameController.Instance.GetUIController().ShowWinningMessage();
         GameController.Instance.SetCurrentGameState(GameController.GameState.VICTORY);
+    }
+
+    public void SetDead(bool dead)
+    {
+        GetComponent<BoxCollider2D>().enabled = !dead;
     }
 }
