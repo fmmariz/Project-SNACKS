@@ -139,23 +139,19 @@ public class CharController : MonoBehaviour
         }
     }
 
-    bool _enrage; 
-
     private void GetSnack(GameObject snackObject)
     {
         Destroy(snackObject);
         gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 0f, 0f, 1f);
-        _enrage = true;
     }
 
     private void DestroyObstacle(GameObject obstacleObject)
     {
-        if (_enrage)
+        if (gameObject.GetComponent<SpriteRenderer>().color == new Color(1f, 0f, 0f, 1f))
         {
             Instantiate(death, transform.position, transform.rotation);
             Destroy(obstacleObject);
             gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
-            _enrage = false;
         }
         else
         {
