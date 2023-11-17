@@ -17,6 +17,9 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private GameObject _pauseMenu;
 
+    [SerializeField] private GameObject _canvas;
+    [SerializeField] private GameObject _messagePrefab;
+
     void Start()
     {
         victoryMessage.SetActive(false);
@@ -54,5 +57,12 @@ public class UIController : MonoBehaviour
             _resetIcon.GetComponent<RawImage>().color = new Color(255, 255, 255, 255);
         }
 
+    }
+
+    public void ShowMessage(string title, string subtitle = "", float time = 3f)
+    {
+        GameObject message = Instantiate(_messagePrefab, _canvas.transform.position, Quaternion.identity, _canvas.transform);
+        UIWarningMessage uIWarningMessage = message.GetComponent<UIWarningMessage>();
+        uIWarningMessage.ShowMessage(title, subtitle, time);    
     }
 }
