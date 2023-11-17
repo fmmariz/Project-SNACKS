@@ -24,7 +24,6 @@ public class UIWarningMessage : MonoBehaviour
     {
         if (_activated)
         {
-            Debug.Log($"{t}+{_animCurve.Evaluate(t)}");
             transform.position = new Vector3(-1353f +
                 _animCurve.Evaluate(t) * (1353f*3f), _y);
             t += Time.deltaTime/timeshowing;

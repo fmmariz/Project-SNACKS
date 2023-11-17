@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -97,9 +98,21 @@ public class GameController : MonoBehaviour
         _currentState = currentState;
     }
 
+    public void ToMainMenu()
+    {
+        SceneManager.LoadSceneAsync("Main Menu");
+    }
+
+    public void ToPlayGame()
+    {
+        SceneManager.LoadSceneAsync("MainScene");
+    }
+
     public void CloseGame()
     {
         Application.Quit();
     }
+
+
 
 }
