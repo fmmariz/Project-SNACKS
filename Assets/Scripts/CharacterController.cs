@@ -150,6 +150,8 @@ public class CharController : MonoBehaviour
             GameController.Instance.soundControl.PlaySoundEffect("powerup");
             GameController.Instance.uiController.ShowMessage("Power UP !!", "Break obstaclesw with ease!", 3f);
             GetSnack(other.gameObject);
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 0f, 0f, 1f);
+            _activeSnacks.Add(ActiveSnack.POWER);
         }
     }
 
@@ -172,8 +174,6 @@ public class CharController : MonoBehaviour
     private void GetSnack(GameObject snackObject)
     {
         Destroy(snackObject);
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 0f, 0f, 1f);
-        _activeSnacks.Add(ActiveSnack.POWER);
     }
 
     private void DestroyObstacle(GameObject obstacleObject)
