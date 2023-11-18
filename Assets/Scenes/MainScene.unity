@@ -491,7 +491,7 @@ GameObject:
   - component: {fileID: 80651845}
   m_Layer: 0
   m_Name: Snack1
-  m_TagString: snack
+  m_TagString: shootSnack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3983,7 +3983,7 @@ GameObject:
   - component: {fileID: 689165671}
   m_Layer: 0
   m_Name: Snack4
-  m_TagString: snack
+  m_TagString: shootSnack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10105,7 +10105,7 @@ GameObject:
   - component: {fileID: 1971589107}
   m_Layer: 0
   m_Name: Snack3
-  m_TagString: snack
+  m_TagString: flySnack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

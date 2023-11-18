@@ -10,6 +10,8 @@ TagManager:
   - floor
   - deathZone
   - save
+  - shootSnack
+  - flySnack
   layers:
   - Default
   - TransparentFX
