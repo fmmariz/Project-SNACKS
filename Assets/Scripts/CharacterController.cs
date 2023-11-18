@@ -96,7 +96,7 @@ public class CharController : MonoBehaviour
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             if(_activeSnacks.Contains(ActiveSnack.FLIGHT))
             {
-                jumpForce = 25;
+                jumpForce = 27;
             }
             animator.SetBool("isWalking", false);
             animator.SetBool("isJumping", true);
