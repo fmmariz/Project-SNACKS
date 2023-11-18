@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 80651846}
   - component: {fileID: 80651845}
   m_Layer: 0
-  m_Name: Snack (1)
+  m_Name: Snack1
   m_TagString: snack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -872,7 +872,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2786368210201796189, guid: 7ba17a3324ba1e8428ba139ea6dde3d4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -34.03
+      value: -32.8
       objectReference: {fileID: 0}
     - target: {fileID: 2786368210201796189, guid: 7ba17a3324ba1e8428ba139ea6dde3d4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2780,7 +2780,113 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floatSpeed: 5
-  floatAmplitude: 0.4
+  floatAmplitude: 0.3
+--- !u!1 &546223205
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 546223208}
+  - component: {fileID: 546223207}
+  - component: {fileID: 546223206}
+  m_Layer: 0
+  m_Name: Flag
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!95 &546223206
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546223205}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 229a0d428fd9a4db1927087abc8a2262, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!212 &546223207
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546223205}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 875189154, guid: 8956b98d4a2b54588b6b230e4b46277e, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.07, y: 2.43}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &546223208
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546223205}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: 0.033643432, w: 0.99943393}
+  m_LocalPosition: {x: 20.8543, y: -9.6609, z: 0}
+  m_LocalScale: {x: 3.1099215, y: 2.3845973, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 3.856}
 --- !u!1 &551568695
 GameObject:
   m_ObjectHideFlags: 0
@@ -3468,7 +3574,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floatSpeed: 5
-  floatAmplitude: 0.4
+  floatAmplitude: 0.3
 --- !u!1 &841161149
 GameObject:
   m_ObjectHideFlags: 0
@@ -3846,11 +3952,11 @@ Transform:
   m_GameObject: {fileID: 883433732}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 24.6, y: 5.2, z: 2.7438774}
+  m_LocalPosition: {x: -10.43161, y: 14.7975855, z: 0.1275404}
   m_LocalScale: {x: 4.3030167, y: 4.3030167, z: 4.3030167}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1317761248}
+  m_Father: {fileID: 1178215874}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &883433735
 BoxCollider2D:
@@ -4913,6 +5019,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 883433734}
   - {fileID: 2095075670}
   - {fileID: 1082957231}
   m_Father: {fileID: 0}
@@ -5097,7 +5204,7 @@ GameObject:
   - component: {fileID: 1211118868}
   - component: {fileID: 1211118869}
   m_Layer: 0
-  m_Name: Snack
+  m_Name: Snack2
   m_TagString: snack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5760,7 +5867,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floatSpeed: 5
-  floatAmplitude: 0.4
+  floatAmplitude: 0.3
 --- !u!1 &1314260486
 GameObject:
   m_ObjectHideFlags: 0
@@ -5864,7 +5971,6 @@ Transform:
   m_Children:
   - {fileID: 1173067902}
   - {fileID: 2014961779}
-  - {fileID: 883433734}
   - {fileID: 1399259490}
   - {fileID: 480139685}
   - {fileID: 788032761}
@@ -5893,7 +5999,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2786368210201796189, guid: 7ba17a3324ba1e8428ba139ea6dde3d4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -13.4
+      value: -13.3
       objectReference: {fileID: 0}
     - target: {fileID: 2786368210201796189, guid: 7ba17a3324ba1e8428ba139ea6dde3d4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6307,7 +6413,7 @@ Transform:
   m_GameObject: {fileID: 1399259488}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.5, y: -20, z: 2.7438774}
+  m_LocalPosition: {x: 74.5, y: -19.8, z: 2.7438774}
   m_LocalScale: {x: 2.9426, y: 2.9426, z: 2.9426}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6410,7 +6516,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floatSpeed: 5
-  floatAmplitude: 0.4
+  floatAmplitude: 0.3
 --- !u!1 &1421147968
 GameObject:
   m_ObjectHideFlags: 0
@@ -7549,7 +7655,7 @@ Transform:
   m_GameObject: {fileID: 1703911606}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 74.5, y: -19.900003, z: 2.7438774}
+  m_LocalPosition: {x: -12.4, y: -19.9, z: 2.7438774}
   m_LocalScale: {x: 2.9426, y: 2.9426, z: 2.9426}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7620,7 +7726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floatSpeed: 5
-  floatAmplitude: 0.4
+  floatAmplitude: 0.3
 --- !u!1 &1718430023
 GameObject:
   m_ObjectHideFlags: 0
@@ -8003,7 +8109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floatSpeed: 5
-  floatAmplitude: 0.4
+  floatAmplitude: 0.3
 --- !u!1 &1862968059
 GameObject:
   m_ObjectHideFlags: 0
@@ -8409,7 +8515,7 @@ GameObject:
   - component: {fileID: 1971589108}
   - component: {fileID: 1971589107}
   m_Layer: 0
-  m_Name: Snack (2)
+  m_Name: Snack3
   m_TagString: snack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9841,11 +9947,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2786368210201796189, guid: 7ba17a3324ba1e8428ba139ea6dde3d4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 43.7
+      value: 52.1
       objectReference: {fileID: 0}
     - target: {fileID: 2786368210201796189, guid: 7ba17a3324ba1e8428ba139ea6dde3d4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -20.33
+      value: -20.7
       objectReference: {fileID: 0}
     - target: {fileID: 2786368210201796189, guid: 7ba17a3324ba1e8428ba139ea6dde3d4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9890,10 +9996,8 @@ SceneRoots:
   m_Roots:
   - {fileID: 1317761248}
   - {fileID: 203893851}
+  - {fileID: 546223208}
   - {fileID: 1264085415}
-  - {fileID: 1211118865}
-  - {fileID: 80651848}
-  - {fileID: 1971589110}
   - {fileID: 2067633483}
   - {fileID: 1925183104}
   - {fileID: 985694085}
@@ -9902,6 +10006,9 @@ SceneRoots:
   - {fileID: 7981993726709790249}
   - {fileID: 1318763641}
   - {fileID: 139554604}
+  - {fileID: 80651848}
+  - {fileID: 1211118865}
+  - {fileID: 1971589110}
   - {fileID: 1429812841}
   - {fileID: 1178215874}
   - {fileID: 1314260488}
