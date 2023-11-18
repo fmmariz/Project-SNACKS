@@ -157,11 +157,16 @@ public class CharController : MonoBehaviour
             GameController.Instance.soundControl.PlaySoundEffect("powerup");
             GameController.Instance.uiController.ShowMessage("Power UP !!", "Shoot enemies!", 3f);
             GetSnack(other.gameObject);
-        }else if (other.gameObject.CompareTag("flySnack"))
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(0f, 1f, 0f, 1f);
+            _activeSnacks.Add(ActiveSnack.SHOOT);
+        }
+        else if (other.gameObject.CompareTag("flySnack"))
         {
             GameController.Instance.soundControl.PlaySoundEffect("powerup");
             GameController.Instance.uiController.ShowMessage("Power UP !!", "Fly to the portal!", 3f);
             GetSnack(other.gameObject);
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 1f, 1f);
+            _activeSnacks.Add(ActiveSnack.FLIGHT);
         }
     }
 
