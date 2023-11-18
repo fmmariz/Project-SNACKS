@@ -94,6 +94,10 @@ public class CharController : MonoBehaviour
         if (Input.GetAxis("Vertical") > 0 && !animator.GetBool("isJumping"))
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            if(_activeSnacks.Contains(ActiveSnack.FLIGHT))
+            {
+                jumpForce = 25;
+            }
             animator.SetBool("isWalking", false);
             animator.SetBool("isJumping", true);
             GameController.Instance.soundControl.PlaySoundEffect("jump");
