@@ -6,7 +6,7 @@ using UnityEngine.XR;
 public class CharController : MonoBehaviour
 {
     [SerializeField]
-    private float playerSpeed = 5.0f, jumpForce = 100.0f, resetCooldown = 5f;
+    private float playerSpeed = 5.0f, jumpForce = 150.0f, resetCooldown = 5f;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     public float minX, maxX, minY, maxY;
