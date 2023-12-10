@@ -94,6 +94,10 @@ public class CharController : MonoBehaviour
         if (Input.GetAxis("Vertical") > 0 && !animator.GetBool("isJumping"))
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            if(_activeSnacks.Contains(ActiveSnack.FLIGHT))
+            {
+                jumpForce = 27;
+            }
             animator.SetBool("isWalking", false);
             animator.SetBool("isJumping", true);
             GameController.Instance.soundControl.PlaySoundEffect("jump");
@@ -148,8 +152,25 @@ public class CharController : MonoBehaviour
         if (other.gameObject.CompareTag("snack"))
         {
             GameController.Instance.soundControl.PlaySoundEffect("powerup");
-            GameController.Instance.uiController.ShowMessage("Power UP !!", "Break obstaclesw with ease!", 3f);
+            GameController.Instance.uiController.ShowMessage("Power UP !!", "Break obstacles with ease!", 3f);
             GetSnack(other.gameObject);
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 0f, 0f, 1f);
+            _activeSnacks.Add(ActiveSnack.POWER);
+        }else if (other.gameObject.CompareTag("shootSnack"))
+        {
+            GameController.Instance.soundControl.PlaySoundEffect("powerup");
+            GameController.Instance.uiController.ShowMessage("Power UP !!", "Shoot enemies!", 3f);
+            GetSnack(other.gameObject);
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(0f, 1f, 0f, 1f);
+            _activeSnacks.Add(ActiveSnack.SHOOT);
+        }
+        else if (other.gameObject.CompareTag("flySnack"))
+        {
+            GameController.Instance.soundControl.PlaySoundEffect("powerup");
+            GameController.Instance.uiController.ShowMessage("Power UP !!", "Fly to the portal!", 3f);
+            GetSnack(other.gameObject);
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 1f, 1f);
+            _activeSnacks.Add(ActiveSnack.FLIGHT);
         }
     }
 
@@ -172,8 +193,6 @@ public class CharController : MonoBehaviour
     private void GetSnack(GameObject snackObject)
     {
         Destroy(snackObject);
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 0f, 0f, 1f);
-        _activeSnacks.Add(ActiveSnack.POWER);
     }
 
     private void DestroyObstacle(GameObject obstacleObject)
